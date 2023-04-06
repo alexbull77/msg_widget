@@ -1,0 +1,63 @@
+[
+  {
+    "id": "8LlufOlgR",
+    "username": "user1",
+    "email": "user1@example.com",
+    "password": "password1"
+  },
+  {
+    "id": "j0F2xdJXW",
+    "username": "user2",
+    "email": "user2@example.com",
+    "password": "password2"
+  },
+  {
+    "id": "KkKGdLvrI",
+    "username": "user3",
+    "email": "user3@example.com",
+    "password": "password3"
+  },
+  {
+    "id": "4W8lJYVYm",
+    "username": "user4",
+    "email": "user4@example.com",
+    "password": "password4"
+  },
+  {
+    "id": "eXlLgO8h3",
+    "username": "user5",
+    "email": "user5@example.com",
+    "password": "password5"
+  },
+  {
+    "id": "TPzlrWHKj",
+    "username": "user6",
+    "email": "user6@example.com",
+    "password": "password6"
+  },
+  {
+    "id": "3U6VjKk3Z",
+    "username": "user7",
+    "email": "user7@example.com",
+    "password": "password7"
+  },
+  {
+    "id": "rWTZ7s0pb",
+    "username": "user8",
+    "email": "user8@example.com",
+    "password": "password8"
+  },
+  {
+    "id": "7VxvBpAcP",
+    "username": "user9",
+    "email": "user9@example.com",
+    "password": "password9"
+  },
+  {
+    "id": "Gp4C4cc4h",
+    "username": "user10",
+    "email": "user10@example.com",
+    "password": "password10"
+  }
+]
+
