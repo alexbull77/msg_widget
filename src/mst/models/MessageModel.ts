@@ -1,7 +1,7 @@
-import {types} from "mobx-state-tree";
+import {cast, getParentOfType, types} from "mobx-state-tree";
 import {User} from "./UserModel";
 import { v4 as uuidv4 } from "uuid";
-import {IUserSnapshotOut} from "../types/types";
+import {MessagesStore} from "../store/LatestMessagesStore";
 
 export const Message = types
     .model('User', {
@@ -9,9 +9,19 @@ export const Message = types
         title: '',
         description: '',
         timeSent: types.string,
-        //will possibly implement this
-        user: types.safeReference(<IUserSnapshotOut>User),
+        user: types.safeReference(User),
         isRead: types.boolean,
-        // userId: types.identifier
     })
+    .actions(self => ({
+        toggle() {
+            self.isRead = !self.isRead
+            console.log('toggle')
+        },
+
+        delete() {
+            //how to fix it?
+            // getParent(self, 2).removeMessage(cast(self));
+            getParentOfType(self, MessagesStore).removeMessage(cast(self))
+        }
+    }))
 

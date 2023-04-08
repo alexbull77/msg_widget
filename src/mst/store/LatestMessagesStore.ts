@@ -1,59 +1,87 @@
 import {Message} from "../models/MessageModel";
-import {applySnapshot, types} from "mobx-state-tree";
-import {IMessageSnapshotIn, IMessageSnapshotOut, IUserSnapshotOut} from "../types/types";
-import messages from "./data.json"
-import users from "./users.json"
+import {applySnapshot, destroy, types} from "mobx-state-tree";
+import {
+    IMessage,
+    IMessageSnapshotIn,
+    IMessageSnapshotOut,
+    IUser,
+    IUserSnapshotIn,
+    IUserSnapshotOut
+} from "../types/types";
+import messages from "../../data/messages.json"
+import users from "../../data/users.json"
 import {createContext, useContext} from "react";
 import {User} from "../models/UserModel";
 
-
-const MessagesStore = types
+export const MessagesStore = types
     .model('MessagesStore', {
-        users: types.optional(types.array(types.safeReference(User)), []),
-        messages: types.optional(types.array(types.safeReference(Message)), []),
+        // probably need to use array of safe references cuz we already have users in other stores
+
+        // how to fix this error?
+        users: types.optional(types.array(User), []),
+        messages: types.optional(types.array(Message), []),
     })
     .views(self => ({
-        get latestMessagesForWidget() {
-            const count: number = 6
-
-            const lastMessages = self.messages.slice(0, count + 1)
-            return this.sortForReadAndUnread(lastMessages)
-        },
-
-        sortForReadAndUnread(lastMessages: IMessageSnapshotOut[]) {
-            return lastMessages.sort((a: IMessageSnapshotOut, b: IMessageSnapshotOut) => (
-                a.isRead === b.isRead ? 0 : a.isRead ? 1 : -1)
-            )
-        },
 
         findUserById(id: string) {
-            return self.users.find((user: IUserSnapshotOut) => user.id === id)
+            return self.users.find((user: IUser) => user.id === id)
+        },
+
+        isEmpty() {
+            return !self.messages.length
         }
+
     }))
     .actions(self => ({
+
         fetchUsers () {
-            // const _users: IMessageSnapshotIn[] = []
+            console.log(users)
+            const _users: IUserSnapshotIn[] = []
             users.map(user => {
-                self.user.push(user)
+                _users.push(user)
             })
             // console.log(_users)
-            // applySnapshot(self.users, _users)
-            console.log(self.users)
+            applySnapshot(self.users, _users)
+            console.log('Fetching Users...')
         },
 
         //here needs to be an async function
         fetchMessages () {
             //here we somehow fetch data probably via graphql query
-            const _messages: IMessageSnapshotIn[] = []
+            const _messages: IMessageSnapshotOut[] = []
             messages.map((message) => {
                 _messages.push({
-                    ...message, user: self.findUserById(message.user_id)
+                    timeSent: message.time,
+                    description: message.description,
+                    isRead: message.read,
+                    user: self.findUserById(message.user_id)
                 })
             })
-            console.log(_messages)
             applySnapshot(self.messages, _messages)
-        }
+            console.log('Fetching Messages...')
+
+        },
+
+        removeMessage(message: IMessage) {
+            destroy(message)
+        },
+
+        sortForReadAndUnread() {
+            console.log('Sorting messages...')
+            return self.messages.sort((a, b) => (
+                a.isRead === b.isRead ? 0 : a.isRead ? 1 : -1)
+            )
+        },
     }))
+    .views(self => ({
+
+        getLatestMessagesForWidget(count: number) {
+
+            self.sortForReadAndUnread()
+            return self.messages.slice(0, count + 1)
+        },
+    }))
+
 
 export const LatestMessagesStore = MessagesStore.create({})
 

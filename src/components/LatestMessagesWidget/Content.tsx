@@ -1,65 +1,50 @@
 import React, {useEffect} from 'react';
-import MarkUnreadChatAltIcon from "@mui/icons-material/MarkUnreadChatAlt";
-import ChatIcon from "@mui/icons-material/Chat";
-import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import {LatestMessagesStore, useLatestMessagesStore} from "../../mst/store/LatestMessagesStore";
 import {observer} from "mobx-react-lite";
-import {IMessageSnapshotOut} from "../../mst/types/types";
+import {IMessage} from "../../mst/types/types";
+import {EmptyWidget} from "./EmptyWidget";
+import {Button} from "@mui/material";
+import {SingleMessage} from "./SingleMessage";
 
 export const Content = observer(() => {
-    const {  fetchUsers, fetchMessages, latestMessagesForWidget } = useLatestMessagesStore()
+    const {  isEmpty, fetchUsers, fetchMessages } = useLatestMessagesStore()
+
 
     useEffect(() => {
+        // users should probably get fetched somewhere else
         fetchUsers()
         fetchMessages()
     }, [])
 
     return (
-        <>
+        <div className='mt-12'>
             {
-                LatestMessagesStore.latestMessagesForWidget.length === 0 ? (
-                    <div>
-                        <p>No messages yet</p>
-                    </div>
+                isEmpty() ? (
+                    <EmptyWidget />
                     ) : (
-                    LatestMessagesStore.latestMessagesForWidget
-                            .map((message: IMessageSnapshotOut) => {
+                    LatestMessagesStore.getLatestMessagesForWidget(6)
+                            .map((message: IMessage) => {
                             return (
-                                <>
-                                    <div className='flex justify-between m-5' key={message.id}>
-                                        <div className='flex'>
-                                            {
-                                                message.isRead ? (
-                                                    <ChatIcon />
-                                                ) : (
-                                                    <MarkUnreadChatAltIcon />
-                                                )
-                                            }
-                                            <p className='px-6'>{message.timeSent}</p>
-                                            {
-                                                message.user === undefined ? (
-                                                    <p className='px-4'>Undefined User</p>
-                                                ) : (
-                                                    <p className='px-4'>{`${message.user.firstName} ${message.user.secondName[0]}.`}</p>
-                                                )
-                                            }
-                                        </div>
-                                        <p>{`${message.description.slice(0, 35)}...`}</p>
-                                        <MoreVertOutlinedIcon />
-                                    </div>
+                                <div key={message.id}>
+                                    <SingleMessage message={message}/>
                                     <hr
                                         style={{
                                             background: '#7A899E',
                                             color: '#7A899E',
                                             borderColor: '#7A899E',
-                                            height: '1px',
+                                            height: '0.5px',
                                         }}
                                     />
-                                </>
+                                </div>
                             )
                         })
-                    )
+                )
             }
-        </>
+            <div className='mt-5'>
+                <Button href='#redirect'>
+                    See all
+                </Button>
+            </div>
+        </div>
     )
 })

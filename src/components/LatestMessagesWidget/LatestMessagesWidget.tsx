@@ -1,24 +1,38 @@
-import React, { useEffect } from 'react';
-import { Icon } from '@iconify/react';
-import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt';
-import ChatIcon from '@mui/icons-material/Chat';
+import React from 'react';
 import {TitleBar} from "./TitleBar";
 import {Content} from "./Content";
 import {ContextLatestMessagesStore, LatestMessagesStore} from "../../mst/store/LatestMessagesStore";
+import {CssBaseline, ThemeProvider} from "@mui/material";
+import { createTheme } from '@material-ui/core/styles';
 
 export const LatestMessagesWidget = () => {
 
-    useEffect(() =>{
-        // console.log(users)
-    }, [])
+    const theme = createTheme({
+        typography: {
+            button: {
+                textTransform: 'none'
+            }
+        },
+        palette: {
+            primary: {
+                main: '#157A7A'
+            },
+            secondary: {
+                main: '#000000'
+            }
+        }
+    })
 
     return (
-        <ContextLatestMessagesStore.Provider value={LatestMessagesStore}>
-            <div className='container'>
-                <TitleBar />
-                <Content />
-            </div>
-        </ContextLatestMessagesStore.Provider>
+        <ThemeProvider theme={theme}>
+            <ContextLatestMessagesStore.Provider value={LatestMessagesStore}>
+                <CssBaseline />
+                <div className='container h-365 bg-gray-200 rounded-2xl p-5'>
+                    <TitleBar />
+                    <Content />
+                </div>
+            </ContextLatestMessagesStore.Provider>
+        </ThemeProvider>
     );
 };
 

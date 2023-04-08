@@ -1,0 +1,74 @@
+[
+  {
+    "id": "2f6a0cb6-ee84-4b84-86f7-c309c9b9e3b3",
+    "username": "johndoe123",
+    "firstName": "John",
+    "secondName": "Doe",
+    "email": "johndoe@example.com",
+    "password": "password123"
+  },
+  {
+    "id": "f9dd6b88-7ecf-4088-8e20-1cc1b2d2d0ea",
+    "username": "janedoe456",
+    "firstName": "Jane",
+    "secondName": "Doe",
+    "email": "janedoe@example.com",
+    "password": "password456"
+  },
+  {
+    "id": "4d628f3e-3a8c-4b9e-91dc-11d98dd38908",
+    "username": "bobsmith789",
+    "firstName": "Bob",
+    "secondName": "Smith",
+    "email": "bobsmith@example.com",
+    "password": "password789"
+  },
+  {
+    "id": "1eb674f3-dc52-4db8-95c3-f6eef5c5f5e5",
+    "username": "sarahconnor",
+    "firstName": "Sarah",
+    "secondName": "Connor",
+    "email": "sarahconnor@example.com",
+    "password": "terminator"
+  },
+  {
+    "id": "e4ab1f72-2cd9-4b8c-8a5a-ef5fb2f5c2b8",
+    "username": "alicecooper",
+    "firstName": "Alice",
+    "secondName": "Cooper",
+    "email": "alicecooper@example.com",
+    "password": "schoolsout"
+  },
+  {
+    "id": "4b4a3444-6dd5-4ec5-a6b5-6ba5c5c05550",
+    "username": "davemustaine",
+    "firstName": "Dave",
+    "secondName": "Mustaine",
+    "email": "davemustaine@example.com",
+    "password": "megadeth"
+  },
+  {
+    "id": "497ef82c-1d5a-43ba-9b11-7c539a10df95",
+    "username": "rogerwaters",
+    "firstName": "Roger",
+    "secondName": "Waters",
+    "email": "rogerwaters@example.com",
+    "password": "pinkfloyd"
+  },
+  {
+    "id": "4e4c27d4-13db-4b0e-bb6f-b41e81b0877a",
+    "username": "jerrycantrell",
+    "firstName": "Jerry",
+    "secondName": "Cantrell",
+    "email": "jerrycantrell@example.com",
+    "password": "alicemudgarden"
+  },
+  {
+    "id": "e19ac9c9-9ef9-4f2b-8bb5-cc15423b448e",
+    "username": "jameshetfield",
+    "firstName": "James",
+    "secondName": "Hetfield",
+    "email": "jameshetfield@example.com",
+    "password": "metallica"
+  }
+]

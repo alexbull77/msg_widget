@@ -5,7 +5,7 @@ import {LatestMessagesWidget} from "./components/LatestMessagesWidget/LatestMess
 export const App: React.FC = () => {
 
   return (
-    <div className='mt-6'>
+    <div className='container'>
         <LatestMessagesWidget />
     </div>
   )
