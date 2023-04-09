@@ -9,10 +9,10 @@ import clsx from 'clsx'
 
 interface ContentProps {
     numOfMessages: number
-    textSize: string
+    charsToDisplay: number
 }
 
-export const Content = observer(({ numOfMessages, textSize }: ContentProps) => {
+export const Content = observer(({ numOfMessages, charsToDisplay }: ContentProps) => {
     const { isEmpty, fetchUsers, fetchMessages } = useLatestMessagesStore()
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export const Content = observer(({ numOfMessages, textSize }: ContentProps) => {
                 LatestMessagesStore.getLatestMessagesForWidget(numOfMessages).map((message: IMessage) => {
                     return (
                         <div key={message.id}>
-                            <SingleMessage message={message} />
+                            <SingleMessage message={message} charsToDisplay={charsToDisplay} />
                             <hr
                                 style={{
                                     background: '#7A899E',
