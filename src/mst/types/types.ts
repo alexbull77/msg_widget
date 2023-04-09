@@ -16,7 +16,4 @@ export interface IMessagesStore extends Instance<typeof MessagesStore> {}
 export interface IMessagesStoreSnapshotIn extends SnapshotIn<typeof MessagesStore> {}
 export interface IMessagesStoreSnapshotOut extends SnapshotOut<typeof MessagesStore> {}
 
-// export type UserType = Instance<typeof User>
-// export type MessageType = Instance<typeof Message>
-// export type MessagesStoreType = Instance<typeof MessagesStore>
 

@@ -1,7 +1,8 @@
-import {cast, getParentOfType, types} from "mobx-state-tree";
+import {cast, getParent, getParentOfType, types} from "mobx-state-tree";
 import {User} from "./UserModel";
 import { v4 as uuidv4 } from "uuid";
 import {MessagesStore} from "../store/LatestMessagesStore";
+import {IMessage, IMessageSnapshotOut, IMessagesStore} from "../types/types";
 
 export const Message = types
     .model('User', {
@@ -18,10 +19,15 @@ export const Message = types
             console.log('toggle')
         },
 
-        delete() {
-            //how to fix it?
-            // getParent(self, 2).removeMessage(cast(self));
-            getParentOfType(self, MessagesStore).removeMessage(cast(self))
-        }
+
+    }))
+    .actions(self => ({
+        delete(): void {
+            const parent: IMessagesStore = getParentOfType(self, MessagesStore);
+            // const parent: IMessagesStore = getParent(self, 2);
+            if (parent) {
+                parent.removeMessage(cast(self));
+            }
+        },
     }))
 
