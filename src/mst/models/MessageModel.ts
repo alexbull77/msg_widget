@@ -10,7 +10,7 @@ export const Message: IMessage = types
         title: '',
         description: '',
         timeSent: types.string,
-        user: types.safeReference(User),
+        user: types.safeReference(types.late(() => User)),
         isRead: types.boolean,
     })
 
@@ -23,7 +23,6 @@ export const Message: IMessage = types
     .actions((self: IMessage) => ({
         delete(): void {
             const parent: IMessagesStore = getParentOfType(self, MessagesStore)
-            // const parent: IMessagesStore = getParent(self, 2);
             if (parent) {
                 parent.removeMessage(self)
             }

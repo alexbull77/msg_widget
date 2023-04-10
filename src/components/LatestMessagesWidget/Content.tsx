@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import { LatestMessagesStore, useLatestMessagesStore } from '../../mst/store/LatestMessagesStore'
 import { observer } from 'mobx-react-lite'
-import { IMessage } from '../../mst/types/types'
+import { IMessageSnapshotOut } from '../../mst/types/types'
 import { EmptyWidget } from './EmptyWidget'
 import { Button } from '@mui/material'
 import { SingleMessage } from './SingleMessage'
-import clsx from 'clsx'
 
 interface ContentProps {
     numOfMessages: number
@@ -26,7 +25,7 @@ export const Content = observer(({ numOfMessages, charsToDisplay }: ContentProps
             {isEmpty() ? (
                 <EmptyWidget />
             ) : (
-                LatestMessagesStore.getLatestMessagesForWidget(numOfMessages).map((message: IMessage) => {
+                LatestMessagesStore.getLatestMessagesForWidget(numOfMessages).map((message: IMessageSnapshotOut) => {
                     return (
                         <div key={message.id}>
                             <SingleMessage message={message} charsToDisplay={charsToDisplay} />

@@ -2,12 +2,12 @@ import React from 'react'
 import ChatIcon from '@mui/icons-material/Chat'
 import MarkUnreadChatAltIcon from '@mui/icons-material/MarkUnreadChatAlt'
 import { FunctionsPopover } from './FunctionsPopover'
-import { IMessage } from '../../mst/types/types'
+import { IMessageSnapshotOut } from '../../mst/types/types'
 import { Button } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 
 interface ISingleMessage {
-    message: IMessage
+    message: IMessageSnapshotOut
     charsToDisplay: number
 }
 
